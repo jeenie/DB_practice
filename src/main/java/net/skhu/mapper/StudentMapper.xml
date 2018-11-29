@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.skhu.mapper.StudentMapper">
+	<select id="findAll" resultType="Student">
+		SELECT s.*, d.departmentName
+		FROM student s 
+		LEFT JOIN department d ON s.departmentId = d.id
+	</select>
+	<insert id="insert" parameterType="Student">
+		INSERT student (id, name, departmentId, grade)
+		VALUES (#{id}, #{name], #{departmentId}, #{grade})
+	</insert>
+	<update id="update">
+		UPDATE student 
+		SET departmentId = #{departmentId}, grade = #{grade}
+		WHERE id = #{id}
+	</update>
+	<delete id="delete">
+		DELETE FROM student WHERE id=#{id}
+	</delete>
+</mapper>

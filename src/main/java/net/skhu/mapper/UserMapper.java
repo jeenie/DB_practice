@@ -9,7 +9,7 @@ import net.skhu.dto.User;
 @Mapper
 public interface UserMapper {
 	List<User> findAll();
-	void insert();
+	void insert(User user);
 	void update();
 	void delete();
 }

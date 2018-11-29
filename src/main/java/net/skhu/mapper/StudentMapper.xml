@@ -9,7 +9,7 @@
 	</select>
 	<insert id="insert" parameterType="Student">
 		INSERT student (id, name, departmentId, grade)
-		VALUES (#{id}, #{name], #{departmentId}, #{grade})
+		VALUES (#{id}, #{name}, #{departmentId}, #{grade})
 	</insert>
 	<update id="update">
 		UPDATE student 

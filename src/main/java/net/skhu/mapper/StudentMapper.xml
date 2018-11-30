@@ -7,9 +7,15 @@
 		FROM student s 
 		LEFT JOIN department d ON s.departmentId = d.id
 	</select>
+	<select id="findById" resultType="Student">
+		SELECT s.*, d.departmentName
+		FROM student s 
+		LEFT JOIN department d ON s.departmentId = d.id
+		WHERE s.id=#{id}
+	</select>
 	<insert id="insert" parameterType="Student">
-		INSERT student (id, name, departmentId, grade)
-		VALUES (#{id}, #{name}, #{departmentId}, #{grade})
+		INSERT student (id, name, departmentId, year)
+		VALUES (#{id}, #{name}, #{departmentId}, #{year})
 	</insert>
 	<update id="update">
 		UPDATE student 

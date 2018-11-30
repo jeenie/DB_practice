@@ -6,6 +6,7 @@ public class Student {
 	int departmentId;
 	String departmentName;
 	int year;
+	String password;
 	
 	public int getId() {
 		return id;
@@ -34,7 +35,7 @@ public class Student {
 	public int getYear() {
 		return year;
 	}
-	public void setPassword(int year) {
+	public void setYear(int year) {
 		this.year = year;
 	}
 }

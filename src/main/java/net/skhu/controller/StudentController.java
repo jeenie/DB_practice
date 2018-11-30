@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import net.skhu.dto.Department;
 import net.skhu.dto.Student;
@@ -33,7 +34,7 @@ public class StudentController {
 	}
 	
 	@RequestMapping(value="join", method=RequestMethod.POST)
-	public String join(Model model, Student student, String password) {
+	public String join(Model model, Student student, @RequestParam("password") String password) {
 		User user = new User();
 		user.setUserId(student.getId());
 		user.setPassword(password);

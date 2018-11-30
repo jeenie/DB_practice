@@ -9,6 +9,7 @@ import net.skhu.dto.Student;
 @Mapper
 public interface StudentMapper {
 	List<Student> findAll();
+	Student findById(int id);
 	void insert(Student student);
 	void update(Student student);
 	void delete(Student student);

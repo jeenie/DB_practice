@@ -5,6 +5,9 @@
 	<select id="findAll" resultType="User">
 		SELECT * FROM user
 	</select>
+	<select id="findById" resultType="User">
+		SELECT * FROM user WHERE userId=#{id}
+	</select>
 	<insert id="insert" parameterType="user">
 		INSERT user (userId, password)
 		VALUES (#{userId}, #{password})

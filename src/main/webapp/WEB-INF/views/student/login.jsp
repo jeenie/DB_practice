@@ -13,39 +13,31 @@
 	<script src="${R}res/common.js"></script> 
 	<link rel="stylesheet" href="${R}res/common.css">
 	<title>학생 등록</title>
+	<style>
+		input.form-control.w300 {
+			width: 300px;
+		}
+	</style>
 </head>
 <body>
 	<div class="container">
-		<h1>학생 등록</h1>
+		<h1>학생 로그인</h1>
 		<hr/>
-		<form:form method="post" modelAttribute="student">
+		<form method="post" action="login_processing">
 			<div class="form-group">
-				<label>학번 : </label>
-				<form:input path="id" class="form-control w200"/>
+				<label>아이디 : </label>
+				<input type="text" name="loginId" class="form-control w300" />
 			</div>
 			<div class="form-group">
 				<label>비밀번호 : </label>
-				<input type="password" name="password" class="form-control w200"/>
+				<input type="password" name="passwd" class="form-control w300" />
 			</div>
-			<div class="form-group">
-				<label>이름 : </label>
-				<form:input path="name" class="form-control w200"/>
-			</div>
-			<div class="form-group">
-				<label>학과</label>
-				<form:select path="departmentId" class="form-control w200" itemValue="id" itemLabel="departmentName" items="${depts}"/>
-			</div>
-			<div class="form-group">
-				<label>학년 : </label>
-				<form:input path="year" class="form-control w200"/>
-			</div>
-			<hr/>
 			<div>
 				<button type="submit" class="btn btn-primary">
-					<span class="glyphicon glyphicon-ok"></span>등록</button>
+					<span class="glyphicon glyphicon-ok"></span>로그인</button>
 				</button>
 			</div>
-		</form:form>
+		</form>
 	</div>
 </body>
 </html>

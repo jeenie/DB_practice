@@ -19,27 +19,5 @@ import net.skhu.mapper.UserMapper;
 @Controller
 @RequestMapping("/student")
 public class StudentController {
-	@Autowired DepartmentMapper departmentMapper;
-	@Autowired StudentMapper studentMapper;
-	@Autowired UserMapper userMapper;
 	
-	
-	@RequestMapping(value="join", method=RequestMethod.GET)
-	public String join(Model model) {
-		Student student = new Student();
-		List<Department> depts = departmentMapper.findAll();
-		model.addAttribute("student", student);
-		model.addAttribute("depts", depts);
-		return "student/join";
-	}
-	
-	@RequestMapping(value="join", method=RequestMethod.POST)
-	public String join(Model model, Student student, @RequestParam("password") String password) {
-		User user = new User();
-		user.setUserId(student.getId());
-		user.setPassword(password);
-		studentMapper.insert(student);
-		userMapper.insert(user);
-		return "student/join";
-	}
 }

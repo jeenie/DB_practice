@@ -14,7 +14,7 @@ import net.skhu.mapper.StudentMapper;
 public class UserController {
 	@Autowired StudentMapper studentMapper;
 	
-	@RequestMapping("success/index")
+	@RequestMapping("user/index")
     public String index(Model model) {
 		/*
 		Authentication authentication=SecurityContextHolder.getContext().getAuthentication();

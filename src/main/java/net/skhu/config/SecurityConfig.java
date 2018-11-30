@@ -21,17 +21,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-			.antMatchers("/student/**").permitAll()
+			.antMatchers("/guest/**").permitAll()
 			.antMatchers("/").permitAll()
 			.antMatchers("/**").authenticated();
 		
 		http.csrf().disable();
 		
 		http.formLogin()
-        .loginPage("/student/login")
-        .loginProcessingUrl("/student/login_processing")
-        .failureUrl("/student/login?error")
-        .defaultSuccessUrl("/success/index", true)
+        .loginPage("/guest/login")
+        .loginProcessingUrl("/guest/login_processing")
+        .failureUrl("/guest/login?error")
+        .defaultSuccessUrl("/user/index", true)
         .usernameParameter("loginId")
         .passwordParameter("passwd");
 		

@@ -43,4 +43,11 @@ public class GuestController {
 		userMapper.insert(user);
 		return "student/join";
 	}
+	
+	@RequestMapping("list")
+	public String list(Model model) {
+		List<Student> students = studentMapper.findAll();
+		model.addAttribute("students", students);
+		return "student/list";
+	}
 }

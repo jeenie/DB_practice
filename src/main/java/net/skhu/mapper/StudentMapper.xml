@@ -19,7 +19,7 @@
 	</insert>
 	<update id="update">
 		UPDATE student 
-		SET departmentId = #{departmentId}, grade = #{grade}
+		SET departmentId = #{departmentId}, year = #{year}
 		WHERE id = #{id}
 	</update>
 	<delete id="delete">

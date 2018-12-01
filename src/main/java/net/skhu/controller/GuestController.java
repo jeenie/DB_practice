@@ -38,6 +38,7 @@ public class GuestController {
 		User user = new User();
 		user.setUserId(student.getId());
 		user.setPassword(password);
+		user.setUserType("학생");
 		studentMapper.insert(student);
 		userMapper.insert(user);
 		return "student/join";

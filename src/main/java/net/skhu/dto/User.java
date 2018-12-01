@@ -3,6 +3,7 @@ package net.skhu.dto;
 public class User {
 	int userId;
 	String password;
+	String userType;
 	
 	public int getUserId() {
 		return userId;
@@ -15,5 +16,12 @@ public class User {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public String getUserType() {
+		return userType;
+	}
+	public void setUserType(String userType) {
+		this.userType = userType;
 	}
 }

@@ -14,6 +14,10 @@ public class UserService {
 		int id = Integer.parseInt(userId);
 		if(userMapper.findById(id) != null) {
 			User user = userMapper.findById(id);
+			System.out.println(user.getUserId());
+			System.out.println(password);
+			System.out.println(user.getPassword());
+			System.out.println(user.getPassword().equals(password));
 			if(user.getPassword().equals(password)==false) return null;
 			return user;
 		} else return null;

@@ -16,13 +16,13 @@ public class UserController {
 	
 	@RequestMapping("user/index")
     public String index(Model model) {
-		/*
+		
 		Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
 		int userNumber=Integer.parseInt(authentication.getName());
 		
 		Student student = studentMapper.findById(userNumber);
 		model.addAttribute("student", student);
-		*/
+		
         return "user/index";
     }
 }

@@ -12,7 +12,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
 	<script src="${R}res/common.js"></script> 
 	<link rel="stylesheet" href="${R}res/common.css">
-	<title>학생 등록</title>
+	<title>학생 로그인</title>
 	<style>
 		input.form-control.w300 {
 			width: 300px;
@@ -35,7 +35,6 @@
 			<div>
 				<button type="submit" class="btn btn-primary">
 					<span class="glyphicon glyphicon-ok"></span>로그인</button>
-				</button>
 			</div>
 		</form>
 	</div>

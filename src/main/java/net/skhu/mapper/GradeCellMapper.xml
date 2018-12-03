@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.skhu.mapper.GradeCellMapper">
+	<select id="findById" resultType="GradeCell">
+		SELECT * FROM grade WHERE id=#{id}
+	</select>
+	<select id="findBySubjectId" resultType="GradeCell">
+		SELECT * FROM grade WHERE id=#{id} and subjectCode=#{ss}
+	</select>
+	<select id="findBySubjectName" resultType="GradeCell">
+		SELECT * FROM grade WHERE id=#{id} and subjectName=#{ss}
+	</select>
+	<insert id="insert" parameterType="java.util.List">
+		INSERT grade(id, year, divide, subjectCode, subjectName, type, score, grade)
+		VALUES
+		<foreach collection="list" item="item" separator=",">
+			(#{item.id}, #{item.year}, #{item.divide}, #{item.subjectCode}, #{item.subjectName}, #{item.type}, #{item.score}, #{item.grade})
+		</foreach>
+	</insert>
+</mapper>

@@ -28,16 +28,28 @@
 				<input type="password" name="password" class="form-control w200"/>
 			</div>
 			<div class="form-group">
+				<label>학과 : </label>
+				<form:input path="departmentName" class="form-control w200"/>
+			</div>
+			<div class="form-group">
 				<label>이름 : </label>
 				<form:input path="name" class="form-control w200"/>
 			</div>
 			<div class="form-group">
-				<label>학과</label>
-				<form:select path="departmentId" class="form-control w200" itemValue="id" itemLabel="departmentName" items="${depts}"/>
+				<label>성별 : </label>
+				<form:input path="sex" class="form-control w200"/>
 			</div>
 			<div class="form-group">
 				<label>학년 : </label>
 				<form:input path="year" class="form-control w200"/>
+			</div>
+			<div class="form-group">
+				<label>휴대폰 : </label>
+				<form:input path="phone" class="form-control w200"/>
+			</div>
+			<div class="form-group">
+				<label>이메일 : </label>
+				<form:input path="email" class="form-control w200"/>
 			</div>
 			<hr/>
 			<div>

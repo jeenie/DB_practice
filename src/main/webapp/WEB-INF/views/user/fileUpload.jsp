@@ -16,6 +16,6 @@
 		<button type="submit" class="btn btn-primary" value="upload">업로드</button>
 	</form:form>
 	<hr />
-	
+	<a href="grade" class="btn btn-primary">업로드한 성적 데이터 확인하기</a>
 </body>
 </html>

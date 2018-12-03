@@ -15,19 +15,24 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import net.skhu.dto.GradeCell;
 import net.skhu.dto.MyFile;
 import net.skhu.dto.StudentCell;
+import net.skhu.mapper.GradeCellMapper;
 import net.skhu.mapper.StudentCellMapper;
 
 @Controller
 public class ExcelController {
 	private String fileLocation;
 	@Autowired StudentCellMapper studentCellMapper;
+	@Autowired GradeCellMapper gradeCellMapper;
 	
 	@RequestMapping(value = "guest/fileUpload", method = RequestMethod.GET)
 	public String upload(Model model) {
@@ -90,5 +95,75 @@ public class ExcelController {
 		
 		workbook.close();
 		return "student/fileUpload";
+	}
+	
+	@RequestMapping(value = "user/fileUpload", method = RequestMethod.GET)
+	public String uploadFile(Model model) {
+		MyFile myFile = new MyFile();
+		model.addAttribute("myFile", myFile);
+		return "user/fileUpload";
+	}
+	
+	@RequestMapping(value = "user/fileUpload", method = RequestMethod.POST)
+	public String uploadFile(Model model, MyFile myFile) throws IOException, ParseException{
+		Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
+		int userNumber=Integer.parseInt(authentication.getName());
+		
+		InputStream in = myFile.getFile().getInputStream();
+		File currDir = new File(".");
+		String path = currDir.getAbsolutePath();
+		fileLocation = path.substring(0, path.length()-1) + myFile.getFile().getOriginalFilename();
+		FileOutputStream f = new FileOutputStream(fileLocation);
+		int ch = 0;
+		while((ch = in.read()) != -1)
+			f.write(ch);
+		f.flush();
+		f.close();
+		
+		FileInputStream uploadFile = new FileInputStream(new File(fileLocation));
+		Workbook workbook = new XSSFWorkbook(uploadFile);
+		Sheet sheet = workbook.getSheetAt(0);
+		List<GradeCell> data = new ArrayList<GradeCell>();
+		int rowMax = sheet.getPhysicalNumberOfRows();
+		
+		for(int rowIndex = 1; rowIndex < rowMax; rowIndex++) {
+			XSSFRow row = (XSSFRow) sheet.getRow(rowIndex);
+			int cellMax = row.getLastCellNum();
+			
+			List<Object> list = new ArrayList<Object>();
+			GradeCell gc = new GradeCell();
+			
+			gc.setId(userNumber);
+			for(int cellIndex=0; cellIndex < cellMax; cellIndex++) {
+				XSSFCell cell = row.getCell(cellIndex);
+				switch(cell.getCellTypeEnum()) {
+					case NUMERIC:
+						list.add(((int)cell.getNumericCellValue()));
+						break;
+					case STRING:
+						list.add((String)cell.getStringCellValue());
+						break;
+					default:
+						list.add(" ");
+						break;
+				}
+			}
+			
+			gc.setYear((int)list.get(0));
+			gc.setDivide((String)list.get(1));
+			gc.setSubjectCode((String)list.get(2));
+			gc.setSubjectName((String)list.get(3));
+			gc.setType((String)list.get(4));
+			gc.setScore((int)list.get(5));
+			gc.setGrade((String)list.get(6));
+			
+			data.add(gc);
+			
+		}
+		
+		gradeCellMapper.insert(data);
+		
+		workbook.close();
+		return "user/fileUpload";
 	}
 }

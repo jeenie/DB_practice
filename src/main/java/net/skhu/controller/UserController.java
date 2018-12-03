@@ -24,6 +24,7 @@ public class UserController {
 	@Autowired GradeCellMapper gradeCellMapper;
 	@Autowired UserMapper userMapper;
 	
+	//로그인 성공 시 등장할 페이지(My Page)
 	@RequestMapping("user/index")
     public String index(Model model) {
 		Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
@@ -38,7 +39,7 @@ public class UserController {
         return "user/view";
     }
 	
-	
+	//My Page에서 정보 수정 버튼을 클릭하면 실행할 페이지
 	@RequestMapping("user/edit")
     public String edit(Model model) {
 		Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
@@ -50,9 +51,12 @@ public class UserController {
 		model.addAttribute("student", student);
 		model.addAttribute("password", password);
 		
-        return "user/index";
+        return "user/edit";
     }
 	
+	//edit페이지에서 정보 수정 후 "수정"버튼 클릭시 모든 데이터를 POST방식으로 전송
+	//이 데이터를 받아 아래 코드를 통해 디비에서 정보 수정!
+	//사용자의 비밀 번호 데이터는 User객체에 존재하기 때문에 따로 User객체를 통해서 수정
 	@RequestMapping(value="user/edit", method=RequestMethod.POST)
 	public String edit(Model model, Student2 student, @RequestParam("password") String password) {
 		User user = userMapper.findById(student.getId());
@@ -64,6 +68,7 @@ public class UserController {
 		return "redirect:index";
 	}
 	
+	//
 	@RequestMapping("user/grade")
     public String grade(Model model) {
 		Authentication authentication=SecurityContextHolder.getContext().getAuthentication();

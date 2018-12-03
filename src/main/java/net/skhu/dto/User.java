@@ -1,5 +1,7 @@
 package net.skhu.dto;
 
+//18.12.03 디비캡스톤 기말고사
+//로그인할 때 사용할 사용자 객체
 public class User {
 	int userId;
 	String password;

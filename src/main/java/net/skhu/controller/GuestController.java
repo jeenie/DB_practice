@@ -21,41 +21,11 @@ public class GuestController {
 	@Autowired Student2Mapper studentMapper;
 	@Autowired UserMapper userMapper;
 	
-	
-	/*
-	@RequestMapping(value="join", method=RequestMethod.GET)
-	public String join(Model model) {
-		Student student = new Student();
-		List<Department> depts = departmentMapper.findAll();
-		model.addAttribute("student", student);
-		model.addAttribute("depts", depts);
-		return "student/join";
-	}
-	
-	@RequestMapping(value="join", method=RequestMethod.POST)
-	public String join(Model model, Student student, @RequestParam("password") String password) {
-		User user = new User();
-		user.setUserId(student.getId());
-		user.setPassword(password);
-		user.setUserType("학생");
-		studentMapper.insert(student);
-		userMapper.insert(user);
-		return "student/join";
-	}
-	
-	@RequestMapping("list")
-	public String list(Model model) {
-		List<Student> students = studentMapper.findAll();
-		model.addAttribute("students", students);
-		return "student/list";
-	}
-	*/
-	
 	@RequestMapping(value="create", method=RequestMethod.GET)
 	public String create(Model model) {
 		Student2 student = new Student2();
 		model.addAttribute("student", student);
-		return "student/join";
+		return "student/create";
 	}
 	
 	@RequestMapping(value="create", method=RequestMethod.POST)

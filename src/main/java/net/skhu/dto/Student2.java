@@ -1,5 +1,7 @@
 package net.skhu.dto;
 
+//18.12.03 디비캡스톤 기말고사
+//학생 데이터를 담을 객체
 public class Student2 {
 	int id;
 	String departmentName;

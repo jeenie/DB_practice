@@ -16,36 +16,49 @@
 </head>
 <body>
 	<div class="container">
-		<h1>학생 정보 수정</h1>
-		<hr/>
+		<h1>${student.name} 님 환영합니다.</h1>
+		
 		<form:form method="post" modelAttribute="student">
-			<div class="form-group">
-				<label>학번 : </label>
-				<form:input path="id" class="form-control w200"/>
-			</div>
-			<div class="form-group">
-				<label>비밀번호 : </label>
-				<input type="password" name="password" class="form-control w200"/>
-			</div>
-			<div class="form-group">
-				<label>이름 : </label>
-				<form:input path="name" class="form-control w200"/>
-			</div>
-			<div class="form-group">
-				<label>학과</label>
-				<form:select path="departmentId" class="form-control w200" itemValue="id" itemLabel="departmentName" items="${depts}"/>
-			</div>
-			<div class="form-group">
-				<label>학년 : </label>
-				<form:input path="year" class="form-control w200"/>
-			</div>
-			<hr/>
-			<div>
-				<button type="submit" class="btn btn-primary">
-					<span class="glyphicon glyphicon-ok"></span>등록</button>
-				</button>
-			</div>
-		</form:form>
-	</div>
+				<div class="form-group">
+					<label>학번 : </label>
+					<form:input path="id" class="form-control w200"/>
+				</div>
+				<div class="form-group">
+					<label>비밀번호 : </label>
+					<input type="text" name="password" value="${password}" class="form-control w200"/>
+				</div>
+				<div class="form-group">
+					<label>학과 : </label>
+					<form:input path="departmentName" class="form-control w200"/>
+				</div>
+				<div class="form-group">
+					<label>이름 : </label>
+					<form:input path="name" class="form-control w200"/>
+				</div>
+				<div class="form-group">
+					<label>성별 : </label>
+					<form:input path="sex" class="form-control w200"/>
+				</div>
+				<div class="form-group">
+					<label>학년 : </label>
+					<form:input path="year" class="form-control w200"/>
+				</div>
+				<div class="form-group">
+					<label>휴대폰 : </label>
+					<form:input path="phone" class="form-control w200"/>
+				</div>
+				<div class="form-group">
+					<label>이메일 : </label>
+					<form:input path="email" class="form-control w200"/>
+				</div>
+				<hr/>
+				<div>
+					<button type="submit" class="btn btn-primary">
+						<span class="glyphicon glyphicon-ok"></span>수정</button>
+					</button>
+					<a href="index" class="btn btn-primary">마이페이지로 이동</a>
+				</div>
+			</form:form>
+		</div>
 </body>
 </html>

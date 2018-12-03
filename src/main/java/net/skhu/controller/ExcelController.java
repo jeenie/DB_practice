@@ -34,69 +34,7 @@ public class ExcelController {
 	@Autowired StudentCellMapper studentCellMapper;
 	@Autowired GradeCellMapper gradeCellMapper;
 	
-	@RequestMapping(value = "guest/fileUpload", method = RequestMethod.GET)
-	public String upload(Model model) {
-		MyFile myFile = new MyFile();
-		model.addAttribute("myFile", myFile);
-		return "student/fileUpload";
-	}
-	
-	@RequestMapping(value = "guest/fileUpload", method = RequestMethod.POST)
-	public String upload(Model model, MyFile myFile) throws IOException, ParseException{
-		InputStream in = myFile.getFile().getInputStream();
-		File currDir = new File(".");
-		String path = currDir.getAbsolutePath();
-		fileLocation = path.substring(0, path.length()-1) + myFile.getFile().getOriginalFilename();
-		FileOutputStream f = new FileOutputStream(fileLocation);
-		int ch = 0;
-		while((ch = in.read()) != -1)
-			f.write(ch);
-		f.flush();
-		f.close();
-		
-		FileInputStream uploadFile = new FileInputStream(new File(fileLocation));
-		Workbook workbook = new XSSFWorkbook(uploadFile);
-		Sheet sheet = workbook.getSheetAt(0);
-		List<StudentCell> data = new ArrayList<StudentCell>();
-		int rowMax = sheet.getPhysicalNumberOfRows();
-		
-		for(int rowIndex = 1; rowIndex < rowMax; rowIndex++) {
-			XSSFRow row = (XSSFRow) sheet.getRow(rowIndex);
-			int cellMax = row.getLastCellNum();
-			
-			List<Object> list = new ArrayList<Object>();
-			StudentCell sc = new StudentCell();
-			
-			for(int cellIndex=0; cellIndex < cellMax; cellIndex++) {
-				XSSFCell cell = row.getCell(cellIndex);
-				switch(cell.getCellTypeEnum()) {
-					case NUMERIC:
-						list.add(((int)cell.getNumericCellValue()));
-						break;
-					case STRING:
-						list.add((String)cell.getStringCellValue());
-						break;
-					default:
-						list.add(" ");
-						break;
-				}
-			}
-			
-			sc.setId((int)list.get(0));
-			sc.setName((String)list.get(1));
-			sc.setDepartmentId((int)list.get(2));
-			sc.setYear((int)list.get(3));
-			
-			data.add(sc);
-			
-		}
-		
-		studentCellMapper.insert(data);
-		
-		workbook.close();
-		return "student/fileUpload";
-	}
-	
+	//파일 업로드 페이지 연결
 	@RequestMapping(value = "user/fileUpload", method = RequestMethod.GET)
 	public String uploadFile(Model model) {
 		MyFile myFile = new MyFile();
@@ -104,6 +42,7 @@ public class ExcelController {
 		return "user/fileUpload";
 	}
 	
+	//파일 업로드 버튼 클릭 후, 엑셀 파일을 처리하여 DB에 저장하는 메소드
 	@RequestMapping(value = "user/fileUpload", method = RequestMethod.POST)
 	public String uploadFile(Model model, MyFile myFile) throws IOException, ParseException{
 		Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
@@ -166,4 +105,73 @@ public class ExcelController {
 		workbook.close();
 		return "user/fileUpload";
 	}
+	
+	
+	//이 아래 코드는 시험 대비로 짠 코드
+	/*
+	//파일 업로드 페이지 연결
+	@RequestMapping(value = "guest/fileUpload", method = RequestMethod.GET)
+	public String upload(Model model) {
+		MyFile myFile = new MyFile();
+		model.addAttribute("myFile", myFile);
+		return "student/fileUpload";
+	}
+	
+	
+	@RequestMapping(value = "guest/fileUpload", method = RequestMethod.POST)
+	public String upload(Model model, MyFile myFile) throws IOException, ParseException{
+		InputStream in = myFile.getFile().getInputStream();
+		File currDir = new File(".");
+		String path = currDir.getAbsolutePath();
+		fileLocation = path.substring(0, path.length()-1) + myFile.getFile().getOriginalFilename();
+		FileOutputStream f = new FileOutputStream(fileLocation);
+		int ch = 0;
+		while((ch = in.read()) != -1)
+			f.write(ch);
+		f.flush();
+		f.close();
+		
+		FileInputStream uploadFile = new FileInputStream(new File(fileLocation));
+		Workbook workbook = new XSSFWorkbook(uploadFile);
+		Sheet sheet = workbook.getSheetAt(0);
+		List<StudentCell> data = new ArrayList<StudentCell>();
+		int rowMax = sheet.getPhysicalNumberOfRows();
+		
+		for(int rowIndex = 1; rowIndex < rowMax; rowIndex++) {
+			XSSFRow row = (XSSFRow) sheet.getRow(rowIndex);
+			int cellMax = row.getLastCellNum();
+			
+			List<Object> list = new ArrayList<Object>();
+			StudentCell sc = new StudentCell();
+			
+			for(int cellIndex=0; cellIndex < cellMax; cellIndex++) {
+				XSSFCell cell = row.getCell(cellIndex);
+				switch(cell.getCellTypeEnum()) {
+					case NUMERIC:
+						list.add(((int)cell.getNumericCellValue()));
+						break;
+					case STRING:
+						list.add((String)cell.getStringCellValue());
+						break;
+					default:
+						list.add(" ");
+						break;
+				}
+			}
+			
+			sc.setId((int)list.get(0));
+			sc.setName((String)list.get(1));
+			sc.setDepartmentId((int)list.get(2));
+			sc.setYear((int)list.get(3));
+			
+			data.add(sc);
+			
+		}
+		
+		studentCellMapper.insert(data);
+		
+		workbook.close();
+		return "student/fileUpload";
+	}
+	*/
 }
